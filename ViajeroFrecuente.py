@@ -16,7 +16,7 @@ class ViajeroFrecuente:
         return 'numero: '+ self.__numViaj + '\ndni: ' + self.__DNI + '\nNombre: '+ self.__Nombre + '\nApellido: ' + self.__Apellido + '\nMillas: ' + str(self.__millasAcum)
 
     def getnumViaj(self):
-        return self.__numViaj    
+        return self.__numViaj
 
     def cantidadTotaldeMillas(self):
         return self.__millasAcum
@@ -27,7 +27,7 @@ class ViajeroFrecuente:
 
     def canjearMillas (self, canjeMilla):
         if canjeMilla <= self.__millasAcum:
-            self.__millasAcum = canjeMilla
+            self.__millasAcum -= canjeMilla
             print('Se han canjeado las millas.')
         else:
             print('NO hay millas suficientes para canjear.')

@@ -1,48 +1,31 @@
 from ViajeroFrecuente import ViajeroFrecuente
+from Manejador import Manejador
 import csv
 
-def agregarViajeros (listaViajero, agregarViajero):
-    if (agregarViajero[0] != '') & (agregarViajero[1] != '') & (agregarViajero[2] != '') & (agregarViajero[3] != '') & (agregarViajero[4].isdigit()):
-         unViajero = ViajeroFrecuente(agregarViajero[0],agregarViajero[1],agregarViajero[2],agregarViajero[3],int(agregarViajero[4]))
-         listaViajero.append(unViajero)
-
-def buscaIndice(n,l):
-    indice = 0
-    band = True
-    while (indice < len(l)) & (band):
-        if l[indice].getnumViaj() == n:
-            band = False
-        else:
-            indice+=1
-    if indice < len(l):
-        return indice
-    else:
-        return -1
-
 def consultarMillas(numero,lista):
-    i = buscaIndice(numero,lista)
+    i = lista.buscaIndice(numero)
     if i != -1:
-        print(lista[i].cantidadTotaldeMillas())
+        print(lista.getViajero(i).cantidadTotaldeMillas())
     else:
         print('No existe un viajero frecuente con ese numero.')
 
 def acumMillas(numero,lista):
-    i = buscaIndice(numero,lista)
+    i = lista.buscaIndice(numero)
     if i != -1:
         cant = input('Ingrese la cantidad de millas a acumular: ')
         if cant.isdigit():
-            lista[i].acumularMillas(int(cant))
+            lista.getViajero(i).acumularMillas(int(cant))
         else:
             print('Ese no es un valor aceptable.')
     else:
         print('No existe un viajero frecuente con ese numero.')
 
 def canjMillas(numero,lista):
-    i = buscaIndice(numero,lista)
+    i = lista.buscaIndice(numero)
     if i != -1:
         cant = input('Ingrese la cantidad de millas a canjear: ')
         if cant.isdigit():
-            lista[i].canjearMillas(int(cant))
+            lista.getViajero(i).canjearMillas(int(cant))
         else:
             print('Ese no es un valor aceptable.')
     else:
@@ -62,12 +45,11 @@ if __name__ == '__main__':
 
     archivo = open('ejemplo.csv')
     reader = csv.reader(archivo, delimiter = ';')
-    ListaViajeros = []
+    ListaViajeros = Manejador()
     for lista in reader:
-        agregarViajeros(ListaViajeros, lista)
-#    for elemento in ListaViajeros:  para ver la lista de objetos creados
-#        print(elemento)
-#        print('\n')
+        ListaViajeros.agregarViajeros(lista)
+    archivo.close()
+    ListaViajeros.Mostrar()
 
     viajero = input('Ingrese numero de viajero frecuente, ingrese 0 para terminar: ')
     while viajero != '0':
